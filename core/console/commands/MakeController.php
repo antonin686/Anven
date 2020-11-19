@@ -47,6 +47,7 @@ class MakeController extends Command
             if ($option_resource) {
 
                 $fileContent = "<?php \r\n";
+                $fileContent .= "namespace app\controllers;\r\n\r\n";
                 $fileContent .= "use app\controllers\Controller; \r\n\r\n";
                 $fileContent .= "class {$name}Controller extends Controller\r\n{\r\n";
                 //Index Function

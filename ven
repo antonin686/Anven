@@ -9,5 +9,6 @@ $application = new Application();
 # add our commands
 $application->add(new Serve());
 $application->add(new MakeController());
+$application->add(new MakeModel());
 
 $application->run();
