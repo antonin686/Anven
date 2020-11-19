@@ -1,3 +1,6 @@
 <?php
+require_once 'core/AutoLoader.php';
+require_once 'core/Bootstrap.php';
+require_once 'routes/route.php';
 
-echo "Welcome to Anven";
+$app = new Bootstrap();
