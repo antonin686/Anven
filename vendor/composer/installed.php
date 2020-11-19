@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '4e43adfb6a24880d072284ba38d9ae4f7ed2a06e',
+    'reference' => 'caa889c90cfbc6b765eaf8c26b02c6c570ee0435',
     'name' => '__root__',
   ),
   'versions' => 
@@ -18,7 +18,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '4e43adfb6a24880d072284ba38d9ae4f7ed2a06e',
+      'reference' => 'caa889c90cfbc6b765eaf8c26b02c6c570ee0435',
     ),
     'symfony/console' => 
     array (
