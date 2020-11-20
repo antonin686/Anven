@@ -62,32 +62,21 @@ class MakeModel extends Command
         $option_migration = $input->getOption($this->commandOptionName);
         $option_controller = $input->getOption($this->commandOptionName2);
         $option_resource = $input->getOption($this->commandOptionName3);
-        $text = "";
+        $text = $fileContent = $templateFilePath;
 
-        //$text = $this->controller();
+        //Create Model
+        $templateFilePath = "core/console/templates/model.txt";
+        $myfile = fopen($templateFilePath, "r") or die("Unable to open file!");
+        $fileContent = fread($myfile, filesize($templateFilePath));
+        fclose($myfile);
 
-        if ($name) {
-            $message = $this->createModel($name);
-            $output->writeln($message);
-        } else {
-            $text = "Please give a name for Model!";
-        }
+        $vowels = ['a', 'e', 'i', 'o', 'u'];
+        $table_name = substr($name, -1) == 'y' && !in_array(substr($name, -2, 1), $vowels) ? substr($name, 0, -1) . "ies" : "{$name}s";
 
-        $output->writeln($text);
-    }
-
-    protected function createModel($name)
-    {
-        $text;
+        $fileContent = str_replace('given_name', $name, $fileContent);
+        $fileContent = str_replace('given_table_name', strtolower($table_name), $fileContent);
         $fileName = "{$name}.php";
         $filePath = "app/" . $fileName;
-
-        $fileContent = "<?php \r\n";
-        $fileContent .= "namespace app; \r\n\r\n";
-        $fileContent .= "use database\Model; \r\n\r\n";
-        $fileContent .= "class {$name} extends Model \r\n{\r\n";
-        $fileContent .= "\tprotected static \$table_name = \"" . strtolower($name) . "s\";\r\n";
-        $fileContent .= "}";
 
         if (file_exists($filePath)) {
             $text = "Model {$name} Already Exists!";
@@ -99,6 +88,36 @@ class MakeModel extends Command
             }
         }
 
-        return $text;
+        $output->writeln($text);
+
+        //Create Controller
+
+        if ($option_controller) {
+            $templateFilePath = $option_resource ? "core/console/templates/controller_resource_model.txt" : "core/console/templates/controller_model.txt";
+            $myfile = fopen($templateFilePath, "r") or die("Unable to open file!");
+            $fileContent = fread($myfile, filesize($templateFilePath));
+            fclose($myfile);
+
+            $fileContent = str_replace('given_name', $name, $fileContent);
+            $fileName = "{$name}Controller.php";
+            $filePath = "app/controllers/" . $fileName;
+
+            if (file_exists($filePath)) {
+                $text = "{$name}Controller Already Exists!";
+            } else {
+                if (file_put_contents($filePath, $fileContent) !== false) {
+                    $text = "{$name}Controller created";
+                } else {
+                    echo "Cannot create file (" . basename($filePath) . ").";
+                }
+            }
+
+            $output->writeln($text);
+        }
+
+        //Create Migration
+
+        
     }
+
 }

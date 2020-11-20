@@ -1,0 +1,53 @@
+<?php 
+namespace app\controllers;
+
+use app\controllers\Controller; 
+
+class given_nameController extends Controller
+{
+	/**
+	 * Display listing of the resource
+	 * @Return JSON data
+	 */
+	public function index()
+	{
+		
+	}
+
+	/**
+	 * Create a new resourse
+	 * @Return JSON data
+	 */
+	public function create($request)
+	{
+		
+	}
+
+	/**
+	 * Display the specified resource
+	 * @Return JSON data
+	 */
+	public function show($id)
+	{
+		
+	}
+
+	/**
+	 * Update the specified resource
+	 * @Return JSON data
+	 */
+	public function update($id, $request)
+	{
+		
+	}
+
+	/**
+	 * Remove the specified resource
+	 * @Return JSON data
+	 */
+	public function delete($id)
+	{
+		
+	}
+
+}

@@ -1,0 +1,9 @@
+<?php
+namespace app;
+
+use database\Model;
+
+class given_name extends Model
+{
+    protected static $table_name = "given_table_name";
+}
