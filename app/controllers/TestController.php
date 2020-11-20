@@ -13,4 +13,13 @@ class TestController extends Controller
         // DB::invoke("Update users set password='12' where id = 1");
         return DB::query('Select * from users');
     }
+
+    public function create($request)
+    {
+        $user = User::create([
+            'username' => $request->username,
+            'password' => $request->password,
+        ]);
+        return $user;
+    }
 }

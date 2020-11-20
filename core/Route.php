@@ -19,6 +19,7 @@ class Route
     public static function post($url, $action)
     {
         $action = explode('>', $action);
+        $url = "/api" . $url;
         //print_r($action);
         $req = (object) $_POST;
         self::$routes[$url] = (object) [
