@@ -8,17 +8,14 @@ class Model
     protected static $table_name;
     protected $conn;
 
-    public static function table()
+    public static function table_name()
     {
-        echo static::$table_name;
-        echo $servername;
+        return static::$table_name;
     }
 
     public static function find($id)
     {
-
-        $conn = new DB();
-        $conn = $conn->getConn();
+        $conn = DB::getConn();
 
         // Check connection
         if ($conn->connect_error) {
@@ -41,7 +38,7 @@ class Model
 
     public function all()
     {
-        require 'database/config.php';
+        $conn = DB::getConn();
 
         // Check connection
         if ($conn->connect_error) {
@@ -67,7 +64,7 @@ class Model
 
     public function create($datas)
     {
-        require 'database/config.php';
+        $conn = DB::getConn();
 
         $columns = $values = " ";
         foreach ($datas as $key => $value) {
@@ -96,7 +93,7 @@ class Model
 
     public function update($id, $datas)
     {
-        require 'database/config.php';
+        $conn = DB::getConn();
 
         $sql = "UPDATE " . static::$table_name . " SET ";
         foreach ($datas as $column => $value) {
@@ -122,7 +119,7 @@ class Model
 
     public function delete($id)
     {
-        require 'database/config.php';
+        $conn = DB::getConn();
 
         $sql = "DELETE FROM " . static::$table_name . " WHERE id = {$id}";
 
