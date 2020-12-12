@@ -19,6 +19,8 @@ class ComposerStaticInit4c849a3d38b982d58f8576bec8df8bd2
     public static $classMap = array (
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
         'MakeController' => __DIR__ . '/../..' . '/core/console/commands/MakeController.php',
+        'MakeMiddleware' => __DIR__ . '/../..' . '/core/console/commands/MakeMiddleware.php',
+        'MakeMigration' => __DIR__ . '/../..' . '/core/console/commands/MakeMigration.php',
         'MakeModel' => __DIR__ . '/../..' . '/core/console/commands/MakeModel.php',
         'Serve' => __DIR__ . '/../..' . '/core/console/commands/Serve.php',
     );

@@ -1,0 +1,13 @@
+<?php
+namespace app\middlewares;
+
+use core\Middleware;
+
+class given_nameMiddleware extends Middleware
+{
+    public function handle($request, $next)
+    {
+        
+        return $next;
+    }
+}

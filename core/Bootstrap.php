@@ -15,14 +15,23 @@ class Bootstrap
             $url = $_SERVER['REQUEST_URI'];
         }
 
-        //print_r ($_SERVER);
+        $requestType = $_SERVER['REQUEST_METHOD'];
+
+        //print_r ($url);
+        Route::clearBuffer();
+        //dd(Route::getRoutes());
 
         if ($url == '/') {
             echo "Welcome to Anven";
             return;
         }
 
+        $url = $requestType. "-" . $url;
+
+        // Collect Route Info
         $route = Route::match($url);
+        //dd($route);
+        
         if (!$route) {
             echo '404 error route not found';
             return;
@@ -30,14 +39,35 @@ class Bootstrap
             $controllerFile = __DIR__ . '/../app/controllers/' . $route->controller . '.php';
             if (!file_exists($controllerFile)) {
                 //require_once 'controllers/Errors.php';
-                $msg = 'No Such Controller Exists "' . $route->controller.'"';
+                $msg = 'No Such Controller Exists "' . $route->controller .'"';
                 echo $msg;
                 //$controller = new Errors($msg);
                 return false;
             }
         }
 
-        //Route::getRoutes();
+        //Perform Middleware Actions
+        $middlewares = $route->middlewares;
+
+        if($middlewares != null) {
+            foreach ($middlewares as $key => $middleware) {
+                $middlewareFile = __DIR__ . '/../app/middlewares/' . $middleware . '.php';
+                if (!file_exists($middlewareFile)) {
+                    //require_once 'controllers/Errors.php';
+                    $msg = 'No Such Middleware Exists "' . $middleware .'"';
+                    echo $msg;
+                    //$controller = new Errors($msg);
+                    return false;
+                }else {
+                    $class = "app\\middlewares\\{$middleware}";
+                    $middleware = new $class();
+                    $result = $middleware->{"handle"}($route->request, true);
+                    
+                    if($result !== true) return;
+                }
+            }
+        }
+
         $class = "app\\controllers\\{$route->controller}";
         $controller = new $class();
         $method = $route->method;
@@ -49,12 +79,12 @@ class Bootstrap
 
         if (method_exists($controller, $method)) {
             if ($route->type == "get") {
-                echo json_encode($controller->{$method}());
+                echo $controller->{$method}();
             } else if ($route->type == "post") {
-                echo json_encode($controller->{$method}($route->request));
+                echo $controller->{$method}($route->request);
             }
         }else {
-            echo 'Error:Given method not found for controller ' . $controller;
+            echo 'Error:Given method not found for controller ' . $route->controller;
             return;
         }
     }

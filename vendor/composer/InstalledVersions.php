@@ -19,7 +19,7 @@ private static $installed = array (
     'aliases' => 
     array (
     ),
-    'reference' => '64694c7c5d76ad037e45105b4049a57a2a2e4d75',
+    'reference' => '9dfa5a36ebd63931548881f5366129bec1418f8a',
     'name' => '__root__',
   ),
   'versions' => 
@@ -31,7 +31,7 @@ private static $installed = array (
       'aliases' => 
       array (
       ),
-      'reference' => '64694c7c5d76ad037e45105b4049a57a2a2e4d75',
+      'reference' => '9dfa5a36ebd63931548881f5366129bec1418f8a',
     ),
     'symfony/console' => 
     array (
