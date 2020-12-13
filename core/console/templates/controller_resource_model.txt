@@ -37,7 +37,7 @@ class given_nameController extends Controller
 	 * Update the specified resource
 	 * @Return JSON data
 	 */
-	public function update($id, $request)
+	public function update($request, $id)
 	{
 		
 	}

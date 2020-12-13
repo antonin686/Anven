@@ -25,11 +25,9 @@ class Bootstrap
             echo "Welcome to Anven";
             return;
         }
-
-        $url = $requestType. "-" . $url;
-
+        
         // Collect Route Info
-        $route = Route::match($url);
+        $route = Route::match($url, $requestType);
         //dd($route);
         
         if (!$route) {
@@ -71,20 +69,24 @@ class Bootstrap
         $class = "app\\controllers\\{$route->controller}";
         $controller = new $class();
         $method = $route->method;
+        $params = $route->params;
 
         if ($method == null) {
-            echo "Error:No given method in route!!!";
+            echo "Error:No method given in route!!!";
             return;
         }
 
         if (method_exists($controller, $method)) {
-            if ($route->type == "get") {
-                echo $controller->{$method}();
-            } else if ($route->type == "post") {
-                echo $controller->{$method}($route->request);
-            }
+            $r = new ReflectionMethod($controller, $method);
+            $args = count($r->getParameters());
+
+            if($args == 0) echo $controller->{$method}();
+            else if($args == 1) echo $params !== false ?  $controller->{$method}($params) :  $controller->{$method}($route->request);
+            else if($args == 2) echo $controller->{$method}($route->request, $params);
+            else echo "Error: Given method should not have more than 2 arguments Class: '$route->controller', Method: '$method'!!!";
+            
         }else {
-            echo 'Error:Given method not found for controller ' . $route->controller;
+            echo 'Error:Given method not found for controller!!!' . $route->controller;
             return;
         }
     }

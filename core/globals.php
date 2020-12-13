@@ -9,3 +9,7 @@ function dd($arg) {
 function json($arg) {
     return json_encode($arg);
 }
+
+function pwb($arg) {
+    echo $arg . "</br>";
+}
