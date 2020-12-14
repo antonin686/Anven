@@ -7,7 +7,7 @@ use database\DB;
 
 class TestController extends Controller
 {
-    public function index($request,$params, $dasd)
+    public function index($request,$params)
     {
         // return User::find(1);
         // DB::invoke("Update users set password='12' where id = 1");

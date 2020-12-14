@@ -1,5 +1,7 @@
 <?php
+
 use core\EnvManager;
+use app\User;
 
 class Bootstrap
 {
@@ -9,16 +11,19 @@ class Bootstrap
 
         $url;
 
-        if (isset($_SERVER['QUERY_STRING'])) {
-            $url = '/' . $_SERVER['QUERY_STRING'];
-        } else if (isset($_SERVER['REQUEST_URI'])) {
-            $url = $_SERVER['REQUEST_URI'];
+        if(!isset($_SERVER['PATH_INFO'])) {
+            $url = "/";
+        }else {
+            $url = $_SERVER['PATH_INFO'];
         }
 
         $requestType = $_SERVER['REQUEST_METHOD'];
 
-        //print_r ($url);
+        //dd($_SERVER);
+        
+        $url = str_replace("/anvenxd/public", "", $url);
         Route::clearBuffer();
+        //pwb($url);
         //dd(Route::getRoutes());
 
         if ($url == '/') {

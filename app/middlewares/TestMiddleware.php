@@ -7,7 +7,6 @@ class TestMiddleware extends Middleware
 {
     public function handle($request, $next)
     {
-        //dd($request);
         return $next;
     }
 }

@@ -62,7 +62,7 @@ class MakeModel extends Command
         $option_migration = $input->getOption($this->commandOptionName);
         $option_controller = $input->getOption($this->commandOptionName2);
         $option_resource = $input->getOption($this->commandOptionName3);
-        $text = $fileContent = $templateFilePath;
+        $text = $fileContent = $templateFilePath = "";
 
         //Create Model
         $templateFilePath = "core/console/templates/model.txt";

@@ -33,7 +33,7 @@ class Serve extends Command
             $port = 7000;
         }
 
-        $text = shell_exec("php -S localhost:{$port}");
+        $text = shell_exec("php -S localhost:{$port} -t public");
 
         $output->writeln($text);
     }

@@ -1,8 +1,15 @@
 {
+    "name": "antonin686/anven",
+    "description": "A micro-framework made with Php",
     "require": {
         "symfony/console": "2.6.7"
     },
     "autoload": {
-        "classmap": ["core/console/commands"]
+        "classmap": ["core/console/commands"],
+        "psr-4": {
+            "app\\": "app/",
+            "core\\": "core/",
+            "database\\": "database/"
+        }
     }
 }
