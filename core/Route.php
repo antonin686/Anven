@@ -39,7 +39,7 @@ class Route
             'controller' => $action[0],
             'method' => isset($action[1]) ? $action[1] : null,
             'request' => $request,
-            'middleware' => null,
+            'middlewares' => null,
             'params' => $params,
         ];
     }

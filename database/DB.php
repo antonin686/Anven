@@ -1,6 +1,8 @@
 <?php
 namespace database;
 
+use database\Result;
+
 class DB
 {
     public static function getConn()
@@ -30,7 +32,9 @@ class DB
 
         if ($result = $result->fetch_all(MYSQLI_ASSOC)) {
             $object = json_decode(json_encode($result), false);
-            return $object;
+            $res = new Result($object);
+            
+            return $res;
         } else {
             return null;
         }
